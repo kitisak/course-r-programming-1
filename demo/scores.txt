@@ -1,0 +1,4 @@
+   Phys / 00 /  1:   M  abadda
+   Math / 00 /  2:   F  bcdccb
+   Lang / 00 /  3:   F  abcdab
+   Chem / 00 /  4:   M  cdabaa

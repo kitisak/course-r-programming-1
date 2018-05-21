@@ -1,0 +1,107 @@
+---
+title: "Data from Yahoo finance"
+output: html_notebook
+---
+
+ทำการวิเคราะห์ข้อมูลจากYahoo Finance https://finance.yahoo.com
+
+```{r}
+#load libraries
+library()
+```
+
+## ขั้นตอนที่ 1 ทำการอ่านข้อมูลจากไฟล์ CSV เข้ามายัง R data frame
+
+```{r}
+data.AMZN <- read.csv("AMZN.csv",header=TRUE)
+head(data.AMZN)
+tail(data.AMZN)
+```
+
+## ขั้นตอนที่ 2 ทำการแปลงข้อมูลชนิด Factor เป็น Date เนื่องจากโดยค่า default ของ R จะมองข้อมูลเป็นชนิด Factor
+
+```{r}
+class(data.AMZN$Date)
+```
+
+```{r}
+date <- as.Date(data.AMZN$Date,format="%Y-%m-%d")
+head(date)
+tail(date)
+class(date)
+```
+
+รวมข้อมูล Date เข้ามายัง Data frame
+
+```{r}
+data.AMZN <- read.csv("AMZN.csv",header=TRUE)
+date <- as.Date(data.AMZN$Date,format="%Y-%m-%d")
+data.AMZN <- cbind(date, data.AMZN[,-1])
+head(data.AMZN)
+tail(data.AMZN)
+```
+
+## ขั้นตอนที่ 3 ทำการแปลงช้อมูลจาก Data frame ไปยัง xts object
+
+```{r}
+class(data.AMZN)
+```
+
+ทำการ download library ชื่อว่า xts (eXtensible Time Serie) สำหรับการจัดการข้อมูลในรูปแบบ time serie
+
+```{r}
+library(xts)
+```
+
+ทำการดึงข้อมูลใน column 2 ถึง 7 และเรียงลำดับตาม column date
+
+```{r}
+library(xts)
+data.AMZN <- read.csv("AMZN.csv",header=TRUE)
+data.AMZN <- cbind(date, data.AMZN[,-1])
+data.AMZN <- xts(data.AMZN[,2:7], order.by=data.AMZN[,1])
+class(data.AMZN)
+
+head(data.AMZN)
+tail(data.AMZN)
+```
+
+## ขั้นตอนที่ 4 ทำการเปลี่ยนชื่อ Variable หรือ Columnของข้อมูล
+เริ่มจากการแสดงข้อมูลชื่อ Variable หรือ Column ข้อมูล
+
+```{r}
+names(data.AMZN)
+```
+
+ทำการเปลี่ยนชื่อ ดังนี้
+
+```{r}
+names(data.AMZN) <- paste(c("AMZN.Open","AMZN.High","AMZN.Low",   "AMZN.Close","AMZN.Volume","AMZN.Adjusted"))
+head(data.AMZN)
+```
+
+## ขั้นตอนที่ 5 ทำการแสดงผลข้อมูลในรูปแบบกราฟ
+
+```{r}
+plot(data.AMZN$AMZN.Close)
+```
+
+ทำการลบข้อมูลจำนวน 100 observation ออกไปสำหรับการจำลองเรื่อง data missing
+
+```{r}
+data.missing<-data.AMZN[-300:-400,]
+plot(data.missing$AMZN.Close)
+```
+
+ตรวจสอบ dimension ของข้อมูลโดยที่มี 6 columns นั่นเอง
+
+```{r}
+dim(data.AMZN)
+```
+
+## ขั้นตอนที่ 6 ทำการสรุปข้อมูลเชิงสถิติในเบื้องต้น
+
+```{r}
+summary(data.AMZN)
+```
+
