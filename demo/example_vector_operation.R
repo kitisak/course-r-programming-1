@@ -1,3 +1,20 @@
+# Different modes in vector
+a <- c(1, 2, "Three")
+a
+a[1]
+a[2]
+a[3]
+
+
+# Names of vector
+a <- c(1, 2, 3)
+names(a)
+names(a) <- c("X", "Y", "Z")
+names(a)
+a
+names(a) <- NULL
+a
+
 # Working with vector operation
 u <- c(5,2,8)
 v <- c(1,3,9)
