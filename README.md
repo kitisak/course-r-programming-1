@@ -51,8 +51,7 @@
   * Database
   * Web
 
-
-### Topics Day 2
+### Topics Day 2 and 3
 * Working with data
   * Prepearing data
   * Cleaning data
