@@ -16,7 +16,7 @@ data$Name <- as.character(data$Name)
 data$Title <- sapply(data$Name, FUN=function(x) {strsplit(x, split='[,.]')[[1]][2]})
 data$Title <- sub(' ', '', data$Title)
 
-# datane small title groups
+# data small title groups
 data$Title[data$Title %in% c('Mme', 'Mlle')] <- 'Mlle'
 data$Title[data$Title %in% c('Capt', 'Don', 'Major', 'Sir')] <- 'Sir'
 data$Title[data$Title %in% c('Dona', 'Lady', 'the Countess', 'Jonkheer')] <- 'Lady'

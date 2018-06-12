@@ -1,12 +1,17 @@
 # Reading data
-training_data <- read.csv("train.csv", na.strings=c("NA", "")) 
-testing_data <- read.csv("test.csv", na.strings=c("NA", ""))
+training_data <- read.csv("train.csv") 
+testing_data <- read.csv("test.csv")
 
 summary(training_data)
 head(training_data, 3)
 dim(training_data)
 str(training_data)
 colSums(is.na(training_data))
+colSums(is.na(testing_data))
+
+training_data <- read.csv("train.csv", na.strings=c("NA", "")) 
+testing_data <- read.csv("test.csv", na.strings=c("NA", ""))
+
 
 # Check columns from 2 data frame
 colnames_check <- colnames(training_data) %in% colnames(testing_data)

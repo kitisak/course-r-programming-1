@@ -27,6 +27,7 @@ training_data %>% group_by(Survived, Sex) %>% count()
 # select
 select(training_data, one_of('Age', 'Sex'))
 training_data %>% select(one_of('Age', 'Sex'))
+training_data %>% select(c('Age', 'Sex'))
 training_data %>% select(-one_of('Age', 'Sex'))
 training_data %>% select(starts_with('P'))
 training_data %>% select(ends_with('e'))

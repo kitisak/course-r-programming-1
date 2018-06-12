@@ -37,9 +37,14 @@ ggplot(training_data, aes(x = Pclass, fill = Survived)) +
        title = "Titanic Survival Rates by Pclass")
 
 # Survival rate by pclass and sex
+training_data$Pclass <- as.factor(training_data$Pclass)
+training_data$Sex <- as.factor(training_data$Sex)
+training_data$Survived <- as.factor(training_data$Survived)
+training_data$Embarked <- as.factor(training_data$Embarked)
+
 ggplot(training_data, aes(x = Sex, fill = Survived)) + 
   theme_bw() +
-  facet_wrap(~ Pclass) +
+  facet_wrap(~ Pclass + Embarked) +
   geom_bar() +
   labs(y = "Passenger Count",
        title = "Titanic Survival Rates by Pclass and Sex")
@@ -87,7 +92,7 @@ ggplot(training_data, aes(x = Age, fill = Survived)) +
 # 
 ggplot(training_data[training_data$Pclass == '3' & training_data$Embarked == 'S', ], 
        aes(x = Fare)) +
-  geom_density(fill = '#99d6ff', alpha=0.4) + 
+  geom_density(fill = '#99d6ff', alpha=0.2) + 
   geom_vline(aes(xintercept=median(Fare, na.rm=T)),
              colour='red', linetype='dashed', lwd=1) +
   scale_x_continuous(labels=dollar_format()) +
