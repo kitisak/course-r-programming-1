@@ -68,8 +68,8 @@ data$FamilyID2[data$FamilySize <= 3] <- 'Small'
 data$FamilyID2 <- factor(data$FamilyID2)
 
 # Split back into test and train sets
-train <- data[1:891,]
-test <- data[892:1309,]
+train <- data[1:891]
+test <- data[892:1309]
 
 # Build Random Forest Ensemble
 set.seed(415)

@@ -12,6 +12,13 @@ colSums(is.na(testing_data))
 training_data <- read.csv("train.csv", na.strings=c("NA", "")) 
 testing_data <- read.csv("test.csv", na.strings=c("NA", ""))
 
+data$Cabin
+data$Cabin = as.character(data$Cabin)
+table_names = table(unlist(substr(data$Cabin, 0, 1)))
+table_names
+sort(table_names, decreasing = T)
+
+
 # Check columns from 2 data frame
 colnames_check <- colnames(training_data) %in% colnames(testing_data)
 colnames(training_data[colnames_check==FALSE])
