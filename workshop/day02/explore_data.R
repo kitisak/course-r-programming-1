@@ -12,7 +12,6 @@ colSums(is.na(testing_data))
 training_data <- read.csv("train.csv", na.strings=c("NA", "")) 
 testing_data <- read.csv("test.csv", na.strings=c("NA", ""))
 
-
 # Check columns from 2 data frame
 colnames_check <- colnames(training_data) %in% colnames(testing_data)
 colnames(training_data[colnames_check==FALSE])
@@ -55,10 +54,12 @@ colSums(is.na(data))
 
 # Missing data of Embarked (2)
 table(data$Embarked, useNA = "always")
+which(is.na(data$Embarked))
 data$Embarked[which(is.na(data$Embarked))] = 'S'
 table(data$Embarked, useNA = "always")
 
 # Missing data of Age (263) ?
+data$Name
 data$Name = as.character(data$Name)
 table_names = table(unlist(strsplit(data$Name, "\\s+")))
 sort(table_names[grep('\\.', names(table_names))], decreasing = T)
@@ -67,6 +68,7 @@ sort(table_names[grep('\\.', names(table_names))], decreasing = T)
 table_na = data[which(is.na(data$Age)),]
 table_names = table(unlist(strsplit(table_na$Name, "\\s+")))
 sort(table_names[grep('\\.', names(table_names))], decreasing = T)
+
 
 # Fill in missing value by mean in each group
 title = c("Mr\\.", "Miss\\.", "Mrs\\.", "Master\\." ,"Dr\\.")
